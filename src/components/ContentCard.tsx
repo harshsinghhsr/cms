@@ -4,6 +4,7 @@ import BookmarkButton from './bookmark/BookmarkButton';
 import { formatTime } from '@/lib/utils';
 import VideoThumbnail from './videothumbnail';
 import CardComponent from './CardComponent';
+import PercentageComplete from './PercentageComplete';
 
 export const ContentCard = ({
   title,
@@ -12,6 +13,7 @@ export const ContentCard = ({
   type,
   videoProgressPercent,
   hoverExpand = true,
+  percentComplete,
   bookmark,
   contentId,
   contentDuration,
@@ -85,6 +87,10 @@ export const ContentCard = ({
             side="bottom"
           />
         </div>
+      )}
+
+      {type === 'folder' && (
+        <PercentageComplete percent={percentComplete || 0} />
       )}
       <div className="flex items-center justify-between p-4">
         <div className="space-y-2">

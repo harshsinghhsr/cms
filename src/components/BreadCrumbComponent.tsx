@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/breadcrumb';
 import { FullCourseContent } from '@/db/course';
 import Link from 'next/link';
-import { useMemo } from 'react';
+import { useMemo, Fragment } from 'react';
 
 export default function BreadCrumbComponent({
   rest,
@@ -83,29 +83,24 @@ export default function BreadCrumbComponent({
               finalRouteArray = [...rest];
             }
             return (
-              <>
-                {index !== array.length - 1 ? (
-                  <>
-                    <BreadcrumbItem>
-                      <BreadcrumbLink className="font-semibold" asChild>
-                        <Link
-                          href={`/courses/${course.id}/${finalRouteArray.join('/')}`}
-                        >
-                          {breadcrumb?.title}
-                        </Link>
-                      </BreadcrumbLink>
-                    </BreadcrumbItem>
-                    {/* <BreadcrumbSeparator /> */}
-                    {index + 1 < array.length && <BreadcrumbSeparator />}
-                  </>
-                ) : (
-                  <BreadcrumbItem>
+              <Fragment key={breadcrumb.id}>
+                <BreadcrumbItem>
+                  {index !== array.length - 1 ? (
+                    <BreadcrumbLink className="font-semibold" asChild>
+                      <Link
+                        href={`/courses/${course.id}/${finalRouteArray.join('/')}`}
+                      >
+                        {breadcrumb?.title}
+                      </Link>
+                    </BreadcrumbLink>
+                  ) : (
                     <BreadcrumbPage className="font-semibold text-gray-500">
                       {breadcrumb.title}
                     </BreadcrumbPage>
-                  </BreadcrumbItem>
-                )}
-              </>
+                  )}
+                </BreadcrumbItem>
+                {index !== array.length - 1 && <BreadcrumbSeparator />}
+              </Fragment>
             );
           })}
         </BreadcrumbList>
