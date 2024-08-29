@@ -282,7 +282,6 @@ export const VideoPlayer: FunctionComponent<VideoPlayerProps> = ({
           if (!player) {
             return;
           }
-          console.log('player', player);
           if (player?.paused()) {
             return;
           }
